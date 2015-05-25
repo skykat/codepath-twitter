@@ -19,13 +19,14 @@ class TweetCell: UITableViewCell {
     
     @IBOutlet weak var retweetImageView: UIImageView!
     
+    var tweetId: NSNumber?
+    
     var tweet: Tweet! {
         didSet{
             nameLabel.text = tweet.user?.name
             //userNameLabel.text = "@\(tweet.user?.screenname!)"
             userNameLabel.text = tweet.user?.screenname
             tweetLabel.text = tweet?.text
-          //  timeLabel.text = tweet?.createdAtString
             profileImageView.setImageWithURL(tweet.user?.profileImageUrl)
             retweetedLabel.text = tweet?.retweeted
             if retweetedLabel.text == nil
@@ -34,12 +35,6 @@ class TweetCell: UITableViewCell {
             }else{
                 retweetImageView.hidden = false
             }
-//            thumbImageView.setImageWithURL(business.imageURL)
-//            distanceLabel.text = business.distance
-//            ratingImageView.setImageWithURL(business.ratingImageURL)
-//            reviewCountLabel.text = "\(business.reviewCount!) Reviews"
-//            addressLabel.text = business.address
-//            categoriesLabel.text = business.categories
             
         }
     }
@@ -69,9 +64,31 @@ class TweetCell: UITableViewCell {
 
     
     @IBAction func onRetweet(sender: AnyObject) {
+        var tweetIdDictionary = [String: NSNumber]()
+
+        tweetId = tweet?.tweetId
+        tweetIdDictionary["id"] = tweetId!
+        
+        println("tweetId: \(tweetId!)")
+        TwitterClient.sharedInstance.retweetWithParams(tweetIdDictionary, completion: {(tweets, error) -> () in
+            println("Finished retweeting...")
+        })
+        
     }
     
     @IBAction func onFavorite(sender: AnyObject) {
+        
+        var tweetIdDictionary = [String: NSNumber]()
+        
+        tweetId = tweet?.tweetId
+        tweetIdDictionary["id"] = tweetId!
+        
+        println("tweetId: \(tweetId!)")
+        TwitterClient.sharedInstance.favoriteWithParams(tweetIdDictionary, completion: {(tweets, error) -> () in
+            println("Finished favoriting...")
+        })
+        
+
     }
     
 }

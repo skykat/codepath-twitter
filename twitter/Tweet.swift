@@ -14,6 +14,9 @@ class Tweet: NSObject {
     var createdAtString: String?
     var createdAt: NSDate?
     var retweeted: String?
+    var retweetCount: String?
+    var favoriteCount: String?
+    var tweetId: NSNumber?
     
     init(dictionary: NSDictionary){
         user = User(dictionary: dictionary["user"] as! NSDictionary)
@@ -26,6 +29,10 @@ class Tweet: NSObject {
             var retweetUserName = text!.componentsSeparatedByString(":")
             retweeted = retweetUserName[0]
         }
+        tweetId = dictionary["id"] as? NSNumber
+        retweetCount = dictionary["retweet_count"] as? String
+        favoriteCount = dictionary["favorite_count"] as? String
+
         
         
     }

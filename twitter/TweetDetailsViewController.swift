@@ -20,6 +20,8 @@ class TweetDetailsViewController: UIViewController {
     @IBOutlet weak var retweetImageView: UIImageView!
     @IBOutlet weak var favoriteCountLabel: UILabel!
     @IBOutlet weak var retweetCountLabel: UILabel!
+
+    var tweetId: NSNumber?
     
     var tweet: Tweet!
     
@@ -37,6 +39,8 @@ class TweetDetailsViewController: UIViewController {
         }else{
             retweetImageView.hidden = false
         }
+        retweetCountLabel.text = tweet.retweetCount
+        favoriteCountLabel.text = tweet.favoriteCount
         
         // Do any additional setup after loading the view.
     }
@@ -60,8 +64,31 @@ class TweetDetailsViewController: UIViewController {
     }
 
     @IBAction func onRetweet(sender: AnyObject) {
+        var tweetIdDictionary = [String: NSNumber]()
+        
+        tweetId = tweet?.tweetId
+        tweetIdDictionary["id"] = tweetId!
+        
+        println("tweetId: \(tweetId!)")
+        TwitterClient.sharedInstance.retweetWithParams(tweetIdDictionary, completion: {(tweets, error) -> () in
+            println("Finished retweeting...")
+        })
+
     }
     
     @IBAction func onFavorite(sender: AnyObject) {
+        
+        
+        var tweetIdDictionary = [String: NSNumber]()
+        
+        tweetId = tweet?.tweetId
+        tweetIdDictionary["id"] = tweetId!
+        
+        println("tweetId: \(tweetId!)")
+        TwitterClient.sharedInstance.favoriteWithParams(tweetIdDictionary, completion: {(tweets, error) -> () in
+            println("Finished favoriting...")
+        })
+        
+
     }
 }

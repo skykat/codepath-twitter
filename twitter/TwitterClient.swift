@@ -30,10 +30,9 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             var tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
             completion(tweets: tweets, error: nil)
 
-//            for tweet in tweets{
-////                println("text: \(tweet.text), created: \(tweet.createdAt), username: \(tweet.user?.screenname)")
-//                println("text: \(tweet.text)")
-//            }
+            for tweet in tweets{
+                println("text: \(tweet.text), created: \(tweet.createdAt), username: \(tweet.user?.screenname)")
+            }
             
         }, failure: {(operation:AFHTTPRequestOperation!, error: NSError!) -> Void in
                 println("failed getting home timeline \(error)")
@@ -41,6 +40,34 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             
         })
     }
+    
+    
+    func retweetWithParams(params: NSDictionary?, completion:(tweets: [Tweet]?, error: NSError?) ->()){
+        println("params: \(params!)")
+        let value = params!["id"] as? NSNumber
+        println("value: \(value!)")
+        POST("1.1/statuses/retweet/\(value!).json", parameters: params!, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+        println("finished retweeting?")
+            
+         }, failure: {(operation:AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("failed retweeting \(error)")
+                
+        })
+    }
+    
+    func favoriteWithParams(params: NSDictionary?, completion:(tweets: [Tweet]?, error: NSError?) ->()){
+        println("params: \(params!)")
+        let value = params!["id"] as? NSNumber
+        println("value: \(value!)")
+        POST("1.1/favorites/create.json", parameters: params!, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            println("finished favoriting?")
+            
+            }, failure: {(operation:AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("failed favoriting \(error)")
+                
+        })
+    }
+
     
     func loginWithCompletion(completion: (user: User?, error: NSError?) -> ()){
         loginCompletion = completion
