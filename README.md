@@ -25,6 +25,4 @@ Time spent: `<12>`
 - [ ] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
 
 ### Walkthrough
-
-![Video Walkthrough](https://github.com/skykat/ios_yelp_swift/blob/master/w2_yelp.gif
-
+![Video Walkthrough](https://github.com/skykat/codepath-twitter/blob/master/wk3_twitter.gif)
