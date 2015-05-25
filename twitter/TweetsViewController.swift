@@ -16,15 +16,16 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         tableView.delegate = self
         tableView.dataSource = self
         refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "fetchStories", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: "fetchTweets", forControlEvents: UIControlEvents.ValueChanged)
         let dummyTableVC = UITableViewController()
         dummyTableVC.tableView = tableView
         dummyTableVC.refreshControl = refreshControl
         
-        fetchStories()
+        fetchTweets()
         
         TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: {(tweets, error) -> () in
             self.tweets = tweets
@@ -52,7 +53,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
-    func fetchStories() {
+    func fetchTweets() {
         TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: {(tweets, error) -> () in
             self.tweets = tweets
             self.tableView.reloadData()
@@ -66,14 +67,18 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
 
-    /*
-    // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPathForCell(cell)!
+        let tweet = tweets![indexPath.row]
+        let tweetDetailsViewController = segue.destinationViewController as! TweetDetailsViewController
+        tweetDetailsViewController.tweet = tweet
+        println("preparing for next page")
     }
-    */
+ 
 
 }
