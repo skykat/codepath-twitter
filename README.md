@@ -26,5 +26,5 @@ Time spent: `<12>`
 
 ### Walkthrough
 
-![Video Walkthrough](...)
+![Video Walkthrough](https://github.com/skykat/ios_yelp_swift/blob/master/w2_yelp.gif
 
