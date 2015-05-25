@@ -67,6 +67,19 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 
         })
     }
+    
+    func composeTweetWithParams(params: NSDictionary?, completion:(tweets: [Tweet]?, error: NSError?) ->()){
+        println("params: \(params!)")
+        let value = params!["id"] as? NSNumber
+        println("value: \(value!)")
+        POST("1.1/statuses/update.json", parameters: params!, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            println("finished favoriting?")
+            
+            }, failure: {(operation:AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("failed favoriting \(error)")
+                
+        })
+    }
 
     
     func loginWithCompletion(completion: (user: User?, error: NSError?) -> ()){

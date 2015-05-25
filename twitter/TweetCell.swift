@@ -16,11 +16,12 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetedLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     @IBOutlet weak var retweetImageView: UIImageView!
     
     var tweetId: NSNumber?
-    
     var tweet: Tweet! {
         didSet{
             nameLabel.text = tweet.user?.name
@@ -86,6 +87,7 @@ class TweetCell: UITableViewCell {
         println("tweetId: \(tweetId!)")
         TwitterClient.sharedInstance.favoriteWithParams(tweetIdDictionary, completion: {(tweets, error) -> () in
             println("Finished favoriting...")
+
         })
         
 
