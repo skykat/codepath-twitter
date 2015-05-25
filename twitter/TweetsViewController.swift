@@ -10,20 +10,25 @@ import UIKit
 
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-//    var tweets: [Tweet]?
-      var tweets: [Tweet]!
+    var tweets: [Tweet]!
+    var refreshControl: UIRefreshControl!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.delegate = self
         tableView.dataSource = self
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "fetchStories", forControlEvents: UIControlEvents.ValueChanged)
+        let dummyTableVC = UITableViewController()
+        dummyTableVC.tableView = tableView
+        dummyTableVC.refreshControl = refreshControl
+        
+        fetchStories()
         
         TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: {(tweets, error) -> () in
             self.tweets = tweets
             self.tableView.reloadData()
-            // reload tableview
             // tweet.favorite will do a post
         })
     }
@@ -45,6 +50,15 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
         cell.tweet = self.tweets[indexPath.row]
         return cell
+    }
+    
+    func fetchStories() {
+        TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: {(tweets, error) -> () in
+            self.tweets = tweets
+            self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
+            // tweet.favorite will do a post
+        })
     }
     
     @IBAction func onSignout(sender: AnyObject) {

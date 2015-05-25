@@ -23,7 +23,8 @@ class Tweet: NSObject {
         formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
         createdAt = formatter.dateFromString(createdAtString!)
         if text!.hasPrefix("RT"){
-            retweeted = "@"
+            var retweetUserName = text!.componentsSeparatedByString(":")
+            retweeted = retweetUserName[0]
         }
         
         
