@@ -21,6 +21,8 @@ class TweetDetailsViewController: UIViewController {
     @IBOutlet weak var favoriteCountLabel: UILabel!
     @IBOutlet weak var retweetCountLabel: UILabel!
 
+    @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
     var tweetId: NSNumber?
     
     var tweet: Tweet!
@@ -73,6 +75,7 @@ class TweetDetailsViewController: UIViewController {
         TwitterClient.sharedInstance.retweetWithParams(tweetIdDictionary, completion: {(tweets, error) -> () in
             println("Finished retweeting...")
         })
+        self.retweetButton.setImage(UIImage(named: "twitterretweet_on.png"), forState: UIControlState.Normal)
 
     }
     
@@ -88,6 +91,8 @@ class TweetDetailsViewController: UIViewController {
         TwitterClient.sharedInstance.favoriteWithParams(tweetIdDictionary, completion: {(tweets, error) -> () in
             println("Finished favoriting...")
         })
+        
+        self.favoriteButton.setImage(UIImage(named: "twitterfavoriteon.png"), forState: UIControlState.Normal)
         
 
     }

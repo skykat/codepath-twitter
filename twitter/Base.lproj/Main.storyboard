@@ -97,9 +97,7 @@
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qov-UL-Sys">
                                                     <rect key="frame" x="123" y="82" width="36" height="20"/>
-                                                    <state key="normal" image="twitterretweet.png">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
+                                                    <state key="normal" image="twitterretweet.png"/>
                                                     <state key="selected" image="twitterretweet_on.png"/>
                                                     <connections>
                                                         <action selector="onRetweet:" destination="6Z4-Ku-OlJ" eventType="touchUpInside" id="oxO-gY-KbH"/>
@@ -186,7 +184,6 @@
         <!--Tweet-->
         <scene sceneID="8gO-I7-DJL">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="L6Y-nR-jix" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="fah-mJ-Pcy" customClass="TweetDetailsViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Hod-i3-qxA"/>
@@ -297,9 +294,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Tweet" id="6wR-Mp-q5h"/>
                     <connections>
+                        <outlet property="favoriteButton" destination="TJk-R9-4z1" id="A5I-BN-Vap"/>
                         <outlet property="favoriteCountLabel" destination="RPD-JM-fMQ" id="Sa4-Lz-dnz"/>
                         <outlet property="nameLabel" destination="A0w-li-0Ff" id="Xir-ox-Fjm"/>
                         <outlet property="profileImageView" destination="jcE-Wa-wO5" id="fSM-NJ-qXF"/>
+                        <outlet property="retweetButton" destination="iey-98-5ab" id="rRd-B6-TA5"/>
                         <outlet property="retweetCountLabel" destination="ooW-kv-z9F" id="DVf-fQ-v7J"/>
                         <outlet property="retweetImageView" destination="ZdF-Ay-akC" id="Y0u-xK-IsY"/>
                         <outlet property="retweetedUsernameLabel" destination="M15-PC-SnI" id="O6V-9t-P4L"/>
@@ -308,6 +307,7 @@
                         <outlet property="usernameLabel" destination="37P-je-EA5" id="4Ue-kq-ejI"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L6Y-nR-jix" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3282" y="476"/>
         </scene>
@@ -403,7 +403,6 @@
         <!--Navigation Controller-->
         <scene sceneID="36T-Yc-aYE">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dyb-kA-mKY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sco-4f-V7Y" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XEF-fL-T9y">
@@ -415,6 +414,7 @@
                         <segue destination="fah-mJ-Pcy" kind="relationship" relationship="rootViewController" id="iif-Jh-hUs"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dyb-kA-mKY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2218" y="476"/>
         </scene>

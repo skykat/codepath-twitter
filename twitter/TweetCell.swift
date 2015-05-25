@@ -73,7 +73,10 @@ class TweetCell: UITableViewCell {
         println("tweetId: \(tweetId!)")
         TwitterClient.sharedInstance.retweetWithParams(tweetIdDictionary, completion: {(tweets, error) -> () in
             println("Finished retweeting...")
+            
         })
+        
+        self.retweetButton.setImage(UIImage(named: "twitterretweet_on.png"), forState: UIControlState.Normal)
         
     }
     
@@ -89,6 +92,8 @@ class TweetCell: UITableViewCell {
             println("Finished favoriting...")
 
         })
+        self.favoriteButton.setImage(UIImage(named: "twitterfavoriteon.png"), forState: UIControlState.Normal)
+
         
 
     }
