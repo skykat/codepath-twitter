@@ -12,13 +12,15 @@ class ComposeTweetViewController: UIViewController {
 
     @IBOutlet weak var tweetTextView: UITextView!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    
+    @IBOutlet weak var profileImageView: UIImageView!
+     var tweet: Tweet!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        nameLabel.text =  User.currentUser?.name
+        userNameLabel.text =  User.currentUser?.screenname
+        profileImageView.setImageWithURL( User.currentUser?.profileImageUrl)
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,6 +29,8 @@ class ComposeTweetViewController: UIViewController {
     }
     
 
+ 
+   
     /*
     // MARK: - Navigation
 

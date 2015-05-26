@@ -74,15 +74,29 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-            
+        if segue.identifier == "com.codepath.tweetmodal"{
+            println("com.codepath.tweetmodal")
+
+        }else{
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)!
             let tweet = tweets![indexPath.row]
             let tweetDetailsViewController = segue.destinationViewController as! TweetDetailsViewController
             tweetDetailsViewController.tweet = tweet
             println("preparing for next page")
+        }
+
     
     }
+    
+    @IBAction func onCancel(segue:UIStoryboardSegue) {
+        
+    }
+    
+    @IBAction func onTweet(segue:UIStoryboardSegue) {
+        
+    }
+    
  
 
 }
